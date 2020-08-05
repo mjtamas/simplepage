@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Http\Requests\StoreArticle;
 use Illuminate\Http\Request;
 use App\Tag;
 
@@ -41,10 +42,13 @@ class ArticlesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(StoreArticle $request)
     {
-        $this->validateArticle();
-        $article = new Article(request(['title','excerpt','body']));
+
+        $article = new Article($request->validated());
+
+
+
         $article->user_id = 1;
         $article->save();
 
