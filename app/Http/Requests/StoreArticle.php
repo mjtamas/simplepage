@@ -13,7 +13,7 @@ class StoreArticle extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,11 +23,13 @@ class StoreArticle extends FormRequest
      */
     public function rules()
     {
+       // dd($this->all());
         return [
             'title' => 'required',
             'excerpt' => 'required',
             'body' => 'required',
-            //'tags' =>'exists:tags,id'
+            'tags' => 'array',
+            'tags.*' =>'exists:tags,id'
             //ha kiveszem innen a commentet nem megy
         ];
     }

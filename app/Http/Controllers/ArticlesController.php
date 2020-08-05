@@ -45,16 +45,12 @@ class ArticlesController extends Controller
     public function store(StoreArticle $request)
     {
 
-        $article = new Article($request->validated());
 
-
-
+        $article = new Article($request->only('title','excerpt','body'));
         $article->user_id = 1;
         $article->save();
-
-        $article->tags()->attach(request('tags'));
-
-
+        $article->tags()->sync($request->input('tags'));
+      
         return redirect()->route('articles.index');
     }
 
