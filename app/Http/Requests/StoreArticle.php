@@ -30,7 +30,7 @@ class StoreArticle extends FormRequest
             'body' => 'required',
             'tags' => 'array',
             'tags.*' =>'exists:tags,id'
-            //ha kiveszem innen a commentet nem megy
+
         ];
     }
 }
